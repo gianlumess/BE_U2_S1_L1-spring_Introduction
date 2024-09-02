@@ -6,8 +6,10 @@ import java.util.List;
 public class Pizza extends Alimento {
     private List<Topping>toppings = new ArrayList<>();
 
-    public Pizza(String nome, int calorie, double prezzo, List<Topping> toppings) {
+    public Pizza(String nome, int calorie, double prezzo, Topping topping) {
         super(nome, calorie, prezzo);
-        this.toppings = toppings;
+        this.toppings.add(new Topping("Pomodoro", 50, 0.50));
+        this.toppings.add(new Topping("Mozzarella", 100, 1.00));
+        this.toppings.add(topping);
     }
 }
