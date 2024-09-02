@@ -1,48 +1,105 @@
 package gianlucamessina.BE_U2_S1_L1;
 
 import gianlucamessina.BE_U2_S1_L1.entities.Bevanda;
+
+import gianlucamessina.BE_U2_S1_L1.entities.Menu;
 import gianlucamessina.BE_U2_S1_L1.entities.Pizza;
 import gianlucamessina.BE_U2_S1_L1.entities.Topping;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 public class AlimentiConfig {
     @Bean
-    public Topping getCrudoTopping(){
-        return new Topping("Prosciutto Crudo",150,1.00);
+    public Topping pomodoroTopping(){
+        return new Topping("Pomodoro",0,0);
     }
     @Bean
-    public Topping getBurrataTopping(){
+    public Topping mozzarellaTopping(){
+        return new Topping("Mozzarella",90,0.80);
+    }
+
+    @Bean
+    public Topping crudoTopping(){
+        return new Topping("Prosciutto Crudo",150,2.00);
+    }
+    @Bean
+    public Topping burrataTopping(){
         return new Topping("Burrata",400,2.00);
     }
     @Bean
-    public Topping getCipollaTopping(){
+    public Topping cipollaTopping(){
         return new Topping("Cipolla",20,0.50);
     }
-    @Bean
+    @Bean(name = "salame_piccante")
+    @Primary
     public Topping salamePiccanteTopping(){
         return new Topping("Salame piccante",80,1);
     }
     @Bean
-    public Bevanda getAcquaNaturaleBevanda(){
+    public Bevanda acquaNaturaleBevanda(){
         return new Bevanda("Acqua Naturale",0,2.00,1);
     }
     @Bean
-    public Bevanda getAcquaFrizzanteBevanda(){
+    public Bevanda acquaFrizzanteBevanda(){
         return new Bevanda("Acqua Frizzante",0,2.50,1);
     }
     @Bean
-    public Bevanda getCocaColaBevanda(){
+    public Bevanda cocaColaBevanda(){
         return new Bevanda("Coca-Cola",139,2.50,0.30);
     }
+
     @Bean
-    public Pizza getPizzaSanDaniele(Topping topping){
-        return new Pizza("San Daniele",900,9.00,topping);
+    public Pizza margherita(){
+        List<Topping>toppingList=new ArrayList<>();
+        toppingList.add(pomodoroTopping());
+        toppingList.add(mozzarellaTopping());
+        return new Pizza("Margherita",toppingList);
     }
+
     @Bean
-    public Pizza getDiavola(Topping topping){
-        return new Pizza("Diavola",930,8.00,topping);
+    public Pizza diavola(){
+        List<Topping>toppingList=new ArrayList<>();
+        toppingList.add(pomodoroTopping());
+        toppingList.add(mozzarellaTopping());
+        toppingList.add(salamePiccanteTopping());
+        return new Pizza("Diavola",toppingList);
     }
+
+    @Bean
+    public Pizza sanDaniele(){
+        List<Topping>toppingList=new ArrayList<>();
+        toppingList.add(pomodoroTopping());
+        toppingList.add(mozzarellaTopping());
+        toppingList.add(crudoTopping());
+        return new Pizza("San Daniele",toppingList);
+    }
+
+    @Bean
+    public Menu menu(){
+        List<Pizza> pizzaList = new ArrayList<>();
+        List<Bevanda> bevandaList = new ArrayList<>();
+        List<Topping> toppingsList = new ArrayList<>();
+
+        pizzaList.add(margherita());
+        pizzaList.add(diavola());
+        pizzaList.add(sanDaniele());
+
+        bevandaList.add(acquaNaturaleBevanda());
+        bevandaList.add(acquaFrizzanteBevanda());
+        bevandaList.add(cocaColaBevanda());
+
+        toppingsList.add(cipollaTopping());
+        toppingsList.add(crudoTopping());
+        toppingsList.add(salamePiccanteTopping());
+        toppingsList.add(burrataTopping());
+
+        return new Menu(pizzaList,toppingsList,bevandaList);
+    }
+
 
 }

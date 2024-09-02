@@ -4,12 +4,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pizza extends Alimento {
-    private List<Topping>toppings = new ArrayList<>();
+    private List<Topping>toppingsList;
 
-    public Pizza(String nome, int calorie, double prezzo, Topping topping) {
-        super(nome, calorie, prezzo);
-        this.toppings.add(new Topping("Pomodoro", 50, 0.50));
-        this.toppings.add(new Topping("Mozzarella", 100, 1.00));
-        this.toppings.add(topping);
+
+    public Pizza(String nome, List<Topping> toppings) {
+        super(nome, 1104, 4.99);
+        this.toppingsList = toppings;
+        this.calorie=setCalories(toppings);
+        this.prezzo=setPrice(toppings);
+    }
+
+    public double setPrice(List<Topping> toppings){
+        double tot=4.99;
+        if(toppings!=null){
+            for (int i = 0; i < toppings.size(); i++) {
+                tot+=toppings.get(i).getPrezzo();
+            }
+        }
+        return tot;
+    }
+
+    public int setCalories(List<Topping> toppings){
+        int totCal=1104;
+        if(toppings!=null){
+            for (int i = 0; i < toppings.size(); i++) {
+                totCal+=toppings.get(i).getCalorie();
+            }
+        }
+        return totCal;
+    }
+
+    @Override
+    public String toString() {
+        return "Pizza{" +
+                "nome='" + nome + '\'' +
+                ", toppings=" + toppingsList +
+                ", calorie=" + calorie +
+                ", prezzo=" + prezzo +
+                '}';
     }
 }

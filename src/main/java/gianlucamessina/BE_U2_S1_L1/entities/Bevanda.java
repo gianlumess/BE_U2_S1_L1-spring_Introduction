@@ -18,8 +18,11 @@ public class Bevanda extends Alimento{
 
     @Override
     public String toString() {
-        return "Bevanda{" + super.toString()+
-                "quantità=" + quantita +
-                "}";
+        return "Bevanda{" +
+                "nome='" + nome + '\'' +
+                ", quantita=" + quantita +
+                ", calorie=" + calorie +
+                ", prezzo=" + prezzo +
+                '}';
     }
 }

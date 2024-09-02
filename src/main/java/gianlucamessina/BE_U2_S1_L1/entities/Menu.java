@@ -1,17 +1,33 @@
 package gianlucamessina.BE_U2_S1_L1.entities;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class Menu {
-    private List<Pizza> pizze=new ArrayList<>();
-    private List<Topping> toppings=new ArrayList<>();
-    private List<Bevanda> bevande=new ArrayList<>();
+    private List<Pizza> pizze;
+    private List<Topping> toppings;
+    private List<Bevanda> bevande;
 
     public Menu(List<Pizza> pizze, List<Topping> toppings, List<Bevanda> bevande) {
         this.pizze = pizze;
         this.toppings = toppings;
         this.bevande = bevande;
+    }
+
+    public void printMenu() {
+        System.out.println("******* Menu *******");
+        System.out.println("PIZZAS");
+        this.pizze.forEach(System.out::println);
+        System.out.println();
+
+        System.out.println("TOPPINGS");
+        this.toppings.forEach(System.out::println);
+        System.out.println();
+
+        System.out.println("DRINKS");
+        this.bevande.forEach(System.out::println);
+        System.out.println();
+
     }
 
     public List<Pizza> getPizze() {
